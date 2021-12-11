@@ -6,8 +6,22 @@ class Person
   end
 
   def get_married(person)
-    self.partner = person
-    person.partner = self
+    if person.is_a?(Person)
+      self.partner = person
+      person.partner = self
+    else
+      begin
+        raise PartnerError
+      rescue PartnerError => error
+        puts error.message
+      end
+    end
+  end
+
+  class PartnerError < StandardError; 
+    def message
+      "yada dada ding dong"
+    end
   end
 
 end
